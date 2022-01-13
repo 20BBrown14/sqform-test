@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => {
   };
 });
 
-// 💡 Change the backgroundColor and Title
+// TODO: 💡 Change the backgroundColor and Title
 export default function Header() {
   const { data: session } = useSession();
   const classes = useStyles();
