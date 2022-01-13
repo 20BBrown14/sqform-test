@@ -1,6 +1,9 @@
 // eslint-disable-next-line
 module.exports = {
   distDir: 'build', // Delete this line IF deploying to Vercel instead of ECS
+  eslint: {
+    dirs: ['pages', 'src'],
+  },
   webpackDevMiddleware: (config) => {
     // Required for HMR to work inside a Docker container
     config.watchOptions = {

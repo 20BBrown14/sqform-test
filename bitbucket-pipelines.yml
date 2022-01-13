@@ -4,22 +4,11 @@ options:
   size: 2x
 
 definitions:
-  caches:
-    clientnode: client/node_modules
   services:
     docker:
       memory: 7128
 
 # Setup reusable stuff
-testStep: &testStep
-  name: Run Automated Tests
-  caches:
-    - clientnode
-  script:
-    - echo "Running client test and build steps..."
-    - npm ci
-    - echo "Running the test and build steps"
-    - npm run build
 commonBuildAndDeploy: &commonBuildAndDeploy
   name: Build & Deploy
   image: tstrohmeier/awscli:3.6.4
@@ -78,7 +67,35 @@ commonBuildAndDeploy: &commonBuildAndDeploy
 
 pipelines:
   default:
-    - step: *testStep
+    - step:
+        name: NPM Install
+        caches:
+          - node
+        script:
+          - echo "Running Code Quality Scripts..."
+          - npm install
+    - parallel:
+        - step:
+            name: Code Format
+            caches:
+              - node
+            script:
+              - npm install
+              - npm run format:ci
+        - step:
+            name: Code Linter
+            caches:
+              - node
+            script:
+              - npm install
+              - npm run lint
+        - step:
+            name: NPM Build
+            caches:
+              - node
+            script:
+              - npm install
+              - npm run build
   custom:
     development:
       - step:

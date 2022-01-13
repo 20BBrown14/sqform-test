@@ -1,4 +1,4 @@
-import { signIn } from 'next-auth/client';
+import { signIn } from 'next-auth/react';
 import { Button, makeStyles, Tooltip } from '@material-ui/core';
 import { LoginScreen } from 'scplus-shared-components';
 
@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     paddingRight: '4rem',
     paddingLeft: '4rem',
     fontSize: '14px',
-    fontWeight: 'var(--font-weight-semibold)',
+    fontWeight: 600,
     '&:hover': {
       backgroundColor: 'var(--color-lightGray)',
     },

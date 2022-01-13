@@ -4,7 +4,7 @@
   font-style: normal;
   font-weight: 300;
   src: local('Open Sans Light'), local('OpenSans-Light'),
-    url('./Open_Sans/OpenSans-Light.ttf');
+    url('../../public/Open_Sans/OpenSans-Light.ttf');
 }
 /* open-sans-400 - latin */
 @font-face {
@@ -12,7 +12,7 @@
   font-style: normal;
   font-weight: 400;
   src: local('Open Sans'), local('OpenSans'),
-    url('./Open_Sans/OpenSans-Regular.ttf');
+    url('../../public/Open_Sans/OpenSans-Regular.ttf');
 }
 /* open-sans-600 - latin */
 @font-face {
@@ -20,7 +20,7 @@
   font-style: normal;
   font-weight: 600;
   src: local('Open Sans SemiBold'), local('OpenSans-SemiBold'),
-    url('./Open_Sans/OpenSans-SemiBold.ttf');
+    url('../../public/Open_Sans/OpenSans-SemiBold.ttf');
 }
 /* open-sans-700 - latin */
 @font-face {
@@ -28,5 +28,5 @@
   font-style: normal;
   font-weight: 700;
   src: local('Open Sans Bold'), local('OpenSans-Bold'),
-    url('./Open_Sans/OpenSans-Bold.ttf');
+    url('../../public/Open_Sans/OpenSans-Bold.ttf');
 }

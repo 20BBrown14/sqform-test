@@ -1,6 +1,6 @@
-import React from 'react';
 import Head from 'next/head';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
+import type { GetServerSideProps } from 'next';
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
   );
 }
 
-export async function getServerSideProps(context) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession(context);
 
   if (!session) {
@@ -30,4 +30,4 @@ export async function getServerSideProps(context) {
   return {
     props: {},
   };
-}
+};

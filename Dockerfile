@@ -1,19 +1,19 @@
 # Install dependencies only when needed
-FROM node:alpine AS deps
+FROM node:lts-alpine3.15 AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 
 # Rebuild the source code only when needed
-FROM node:alpine AS builder
+FROM node:lts-alpine3.15 AS builder
 WORKDIR /app
-COPY . .
 COPY --from=deps /app/node_modules ./node_modules
-RUN npm run build && npm ci
+COPY . .
+RUN npm run build
 
 # Production image, copy all the files and run next
-FROM node:alpine AS runner
+FROM node:lts-alpine3.15 AS runner
 WORKDIR /app
 
 ENV NODE_ENV production

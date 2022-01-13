@@ -1,25 +1,32 @@
-import PropTypes from 'prop-types';
 import MomentAdapter from '@material-ui/pickers/adapter/moment';
 import { LocalizationProvider } from '@material-ui/pickers';
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import { StylesProvider } from '@material-ui/styles';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { Provider as NextAuthProvider } from 'next-auth/client';
+import { SessionProvider } from 'next-auth/react';
 import {
   SQAdminLayout,
   muiTheme,
   SnackbarProvider,
 } from 'scplus-shared-components';
 import { useRouter } from 'next/router';
+import { setLocale } from 'yup';
 import Header from '@/components/Header';
 import Body from '@/components/Body';
+import type { AppProps } from 'next/app';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import '../src/styles/index.css';
 
+setLocale({
+  mixed: {
+    required: 'Required',
+  },
+});
+
 const queryClient = new QueryClient({
-  defaultConfig: {
+  defaultOptions: {
     queries: {
       retry: 0,
       refetchOnWindowFocus: false,
@@ -27,11 +34,11 @@ const queryClient = new QueryClient({
   },
 });
 
-function App({ Component, pageProps }) {
+function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
   return (
     <StylesProvider>
-      <NextAuthProvider session={pageProps.session}>
+      <SessionProvider session={pageProps.session}>
         <QueryClientProvider client={queryClient}>
           <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
           <SnackbarProvider>
@@ -50,15 +57,9 @@ function App({ Component, pageProps }) {
             </LocalizationProvider>
           </SnackbarProvider>
         </QueryClientProvider>
-      </NextAuthProvider>
+      </SessionProvider>
     </StylesProvider>
   );
 }
-
-App.propTypes = {
-  Component: PropTypes.oneOfType([PropTypes.element, PropTypes.elementType])
-    .isRequired,
-  pageProps: PropTypes.object,
-};
 
 export default App;

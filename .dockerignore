@@ -1,10 +1,11 @@
-.dockerignore
-.git
-.gitignore
-.next
-Dockerfile*
-docker-compose*
-node_modules
-npm-debug.log
-build
-out
+# Ignore Everything
+**
+# Except
+!.next
+!public
+!build
+!pages
+!src
+!package*.json
+!tsconfig.json
+!next.config.js

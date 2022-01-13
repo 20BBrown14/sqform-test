@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import React from 'react';
 import {
   SQAdminPageLayout,
   SQAdminMainContent,
@@ -6,7 +6,11 @@ import {
   useSnackbar,
 } from 'scplus-shared-components';
 
-export default function Body({ children }) {
+type Props = {
+  children: React.ReactNode;
+};
+
+export default function Body({ children }: Props) {
   const [snackbarState, { closeSnackbar }] = useSnackbar();
 
   return (
@@ -20,8 +24,3 @@ export default function Body({ children }) {
     </SQAdminPageLayout>
   );
 }
-
-Body.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.element, PropTypes.elementType])
-    .isRequired,
-};
